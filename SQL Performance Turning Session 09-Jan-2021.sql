@@ -186,10 +186,6 @@ ON [Details].[StudentDetails] (FirstName)
 --- 11) Never Use Indexes
 
 
-
-
-
-
 -- To Identify Slow running queries 
 SET STATISTICS TIME ON 
 SET STATISTICS IO ON
