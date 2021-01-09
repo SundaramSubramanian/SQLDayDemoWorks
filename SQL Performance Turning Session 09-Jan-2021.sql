@@ -190,9 +190,9 @@ ON SPD.StudentId=SD.StudentId
 
 
 
---- 9) Don't directly load data into Table from External Source 
+--- 10) Don't directly load data into Table from External Source 
 
---- 10) Use Indexes
+--- 11) Use Indexes
 SELECT 
 	FirstName,
 	LastName,
@@ -227,11 +227,9 @@ INCLUDE(LastName)
 --ON [Details].[StudentDetails]
 
 
---- 11) Never Use Indexes
+--- 12) Reduce the joins
 
-
-
-
+--- 13) Never Use Indexes
 
 
 -- To Identify Slow running queries 
