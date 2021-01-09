@@ -153,6 +153,42 @@ SELECT
 	Degree
 FROM [Details].[StudentDetails]
 
+--- Better way 
+
+SELECT 
+	FirstName,
+	LastName,
+	RegistrationNumber,
+	Degree
+FROM [Details].[StudentDetails]
+WHERE RegistrationNumber='789456123'  -- Add some more predicates to get accurate results
+
+
+--- 9) Avoid Correlated Queries 
+
+SELECT 
+	FirstName,
+	LastName,
+	(	SELECT 
+			SPD.AddressLine1 
+		FROM Details.StudentPersonalDetails AS SPD
+		WHERE SPD.StudentId=SD.StudentId
+	) AS Address1
+FROM [Details].[StudentDetails] AS SD
+
+
+--- Better way
+
+SELECT 
+	SD.FirstName,
+	SD.LastName,
+	SPD.AddressLine1
+FROM [Details].[StudentDetails] AS SD 
+JOIN [Details].[StudentPersonalDetails] AS SPD 
+ON SPD.StudentId=SD.StudentId
+
+
+
 
 --- 9) Don't directly load data into Table from External Source 
 
@@ -183,7 +219,19 @@ CREATE NONCLUSTERED INDEX IX_StudentDetails_FirstName
 ON [Details].[StudentDetails] (FirstName)
 
 
+CREATE NONCLUSTERED INDEX IX_StudentDetails_FirstName
+ON [Details].[StudentDetails] (FirstName)
+INCLUDE(LastName)
+
+--DROP INDEX IX_StudentDetails_FirstName 
+--ON [Details].[StudentDetails]
+
+
 --- 11) Never Use Indexes
+
+
+
+
 
 
 -- To Identify Slow running queries 
